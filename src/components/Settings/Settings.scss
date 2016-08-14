@@ -1,0 +1,12 @@
+.settings {
+  font-weight: bold;
+}
+
+.settings--green {
+  composes: settings;
+  color: rgb(25,200,25);
+}
+
+.settingsContainer {
+  margin: 1em auto;
+}
