@@ -1,14 +1,36 @@
+import {
+  cards,
+  deck,
+  table
+} from '../const/settingsConstants.js';
+
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const SETTINGS_INCREMENT = 'SETTINGS_INCREMENT'
+export const SELECT_CARDS = 'SELECT_CARDS'
+export const SELECT_DECK = 'SELECT_DECK'
+export const SELECT_TABLE = 'SELECT_TABLE'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function increment (value = 1) {
+export function selectCards (value) {
   return {
-    type: SETTINGS_INCREMENT,
+    type: SELECT_CARDS,
+    payload: value
+  }
+}
+
+export function selectDeck (value) {
+  return {
+    type: SELECT_DECK,
+    payload: value
+  }
+}
+
+export function selectTable (value) {
+  return {
+    type: SELECT_TABLE,
     payload: value
   }
 }
@@ -33,21 +55,37 @@ export const doubleAsync = () => {
 }
 
 export const actions = {
-  increment,
-  doubleAsync
+  selectCards,
+  selectDeck,
+  selectTable
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [SETTINGS_INCREMENT]: (state, action) => state + action.payload
+  [SELECT_CARDS]: (state, action) => {
+    return { ...state, cardsSelected: action };
+  },
+  [SELECT_DECK]: (state, action) => {
+      return { ...state, deckSelected: action };
+  },
+  [SELECT_TABLE]: (state, action) => {
+    return { ...state, tableSelected: action };
+  }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = 0
+const initialState = {
+  cards: cards,
+  cardsSelected: cards[0],
+  deck: deck,
+  deckSelected: deck[0],
+  table: table,
+  tableSelected: table[0]
+};
 export default function settingsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

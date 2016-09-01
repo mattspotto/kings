@@ -1,6 +1,7 @@
 import {
   suits,
-  ranks
+  ranks,
+  rules
 } from '../const/cardConstants.js';
 
 // ------------------------------------
@@ -9,6 +10,7 @@ import {
 export const INIT_CARDS = 'INIT_CARDS'
 export const SHUFFLE_CARDS = 'SHUFFLE_CARDS'
 export const FLIP_CARD = 'FLIP_CARD'
+export const HIDE_LAST_FLIPPED = 'HIDE_LAST_FLIPPED'
 
 // ------------------------------------
 // Actions
@@ -32,9 +34,17 @@ export function flipCard(card) {
   }
 }
 
+export function hideLastFlipped() {
+  return {
+    type: HIDE_LAST_FLIPPED,
+  }
+}
+
 export const actions = {
   initCards,
-  shuffleCards
+  shuffleCards,
+  flipCard,
+  hideLastFlipped
 }
 
 // ------------------------------------
@@ -43,23 +53,32 @@ export const actions = {
 const ACTION_HANDLERS = {
   [INIT_CARDS]: (state, action) => {
     let cards = [];
+
     for (var i = 0; i < ranks.length; i++) {
       for (var j = 0; j < suits.length; j++) {
         let key = 's' + i + 'c' + j;
         cards.push({
           key: key,
-          rank: ranks[i].symbol,
-          textRank: ranks[i].name,
-          symbol: suits[j].symbol,
-          suit: suits[j].name,
+          rank: ranks[i],
+          rule: rules[i],
+          suit: suits[j],
           flipped: false
         });
       }
     }
-    return cards;
+
+    return { ...state, cards: cards };
   },
   [SHUFFLE_CARDS]: (state, action) => {
-    let cards = [...state];
+
+    let cards = state.cards;
+    //let cards = newState.cards;
+
+    console.log(state);
+    //console.log(newState);
+    console.log(cards);
+
+
     // shuffle the cards
     var currentIndex = cards.length;
     var tempValue,
@@ -71,22 +90,42 @@ const ACTION_HANDLERS = {
       cards[currentIndex] = cards[randomIndex];
       cards[randomIndex] = tempValue;
     }
-    return cards;
+    return { ...state, cards: cards };
   },
   [FLIP_CARD]: (state, action) => {
-    console.log(action.payload);
 
-    let cards = [...state];
-    cards.find(card => card.key === action.payload).flipped = true;
+    let cards = state.cards;
+    let card = cards.find(card => card.key === action.payload);
+    card.flipped = true;
 
-    return cards;
+    console.log(card);
+    let stuff = Object.assign({}, state, {
+      cards: cards,
+      lastFlipped: { ...card, isVisible: true }
+    });
+    console.log(stuff);
+    return stuff;
+  },
+  [HIDE_LAST_FLIPPED]: (state, action) => {
+    console.log(state);
+    let lastFlipped = state.lastFlipped;
+    return { ...state, lastFlipped: { ...lastFlipped, isVisible: false } };
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = [];
+const initialState = {
+  cards: [],
+  lastFlipped: {
+    rank: {},
+    rule: {},
+    suit: {},
+    isVisible: false,
+    flipped: false
+  }
+};
 export default function settingsReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

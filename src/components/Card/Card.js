@@ -8,7 +8,7 @@ export const Card = (props) => (
       : classes.unflipped)}>
       <div className={classes.card + " " + (props.flipped
         ? (classes.front + " ")
-        : (classes.back + " ")) + props.suit} onClick={props.onClick}>
+        : (classes.back + " ")) + classes[props.suit]} onClick={props.onClick}>
         <div className={classes.cardContents}>
           <div className={classes.corner + " " + classes.top}>
             <span className={classes.number}>{props.rank}</span>
