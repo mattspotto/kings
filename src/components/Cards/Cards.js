@@ -2,6 +2,7 @@ import React from 'react'
 import Modal from 'react-modal';
 import classes from './Cards.scss'
 import Card from '../Card'
+import Jug from '../Jug'
 import CardFlipped from '../CardFlipped'
 
 export const Cards = (props) => (
@@ -9,9 +10,13 @@ export const Cards = (props) => (
     <button className='btn btn-default' onClick={props.initCards}>
       Start Game
     </button>
+
     <button className='btn btn-default' onClick={props.shuffleCards}>
       Shuffle Cards
     </button>
+
+    <Jug kingsFlipped={props.cards.kingsFlipped} />
+
     <div className={classes.circleContainer}>
       {props.cards.cards.map((card, i) =>
         <Card
@@ -25,6 +30,7 @@ export const Cards = (props) => (
         />
       )}
     </div>
+
     <Modal
       isOpen={props.cards.lastFlipped.isVisible}
       onRequestClose={() => props.hideLastFlipped()}

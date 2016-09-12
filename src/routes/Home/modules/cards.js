@@ -78,7 +78,6 @@ const ACTION_HANDLERS = {
     //console.log(newState);
     console.log(cards);
 
-
     // shuffle the cards
     var currentIndex = cards.length;
     var tempValue,
@@ -95,15 +94,21 @@ const ACTION_HANDLERS = {
   [FLIP_CARD]: (state, action) => {
 
     let cards = state.cards;
+    let kingsFlipped = state.kingsFlipped;
     let card = cards.find(card => card.key === action.payload);
     card.flipped = true;
 
-    console.log(card);
+    if (card.rank.symbol === 'K') {
+      kingsFlipped++;
+    }
+
     let stuff = Object.assign({}, state, {
       cards: cards,
+      kingsFlipped: kingsFlipped,
       lastFlipped: { ...card, isVisible: true }
     });
     console.log(stuff);
+
     return stuff;
   },
   [HIDE_LAST_FLIPPED]: (state, action) => {
@@ -118,6 +123,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = {
   cards: [],
+  kingsFlipped: 0,
   lastFlipped: {
     rank: {},
     rule: {},
