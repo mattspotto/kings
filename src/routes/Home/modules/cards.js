@@ -1,7 +1,8 @@
 import {
   suits,
   ranks,
-  rules
+  rules,
+  tips
 } from '../const/cardConstants.js';
 
 // ------------------------------------
@@ -11,6 +12,7 @@ export const INIT_CARDS = 'INIT_CARDS'
 export const SHUFFLE_CARDS = 'SHUFFLE_CARDS'
 export const FLIP_CARD = 'FLIP_CARD'
 export const HIDE_LAST_FLIPPED = 'HIDE_LAST_FLIPPED'
+export const SHOW_TIP = 'SHOW_TIP'
 
 // ------------------------------------
 // Actions
@@ -40,11 +42,18 @@ export function hideLastFlipped() {
   }
 }
 
+export function showTip() {
+  return {
+    type: SHOW_TIP,
+  }
+}
+
 export const actions = {
   initCards,
   shuffleCards,
   flipCard,
-  hideLastFlipped
+  hideLastFlipped,
+  showTip
 }
 
 // ------------------------------------
@@ -61,6 +70,7 @@ const ACTION_HANDLERS = {
           key: key,
           rank: ranks[i],
           rule: rules[i],
+          tips: tips[rules[i].tips],
           suit: suits[j],
           flipped: false
         });
@@ -98,6 +108,8 @@ const ACTION_HANDLERS = {
     let card = cards.find(card => card.key === action.payload);
     card.flipped = true;
 
+    console.log(card.tips);
+
     if (card.rank.symbol === 'K') {
       kingsFlipped++;
     }
@@ -115,6 +127,11 @@ const ACTION_HANDLERS = {
     console.log(state);
     let lastFlipped = state.lastFlipped;
     return { ...state, lastFlipped: { ...lastFlipped, isVisible: false } };
+  },
+  [SHOW_TIP]: (state, action) => {
+    let lastFlipped = state.lastFlipped;
+    let tipShown = lastFlipped.tips[Math.floor(Math.random()*lastFlipped.tips.length)].tip;
+    return { ...state, lastFlipped: { ...lastFlipped, tipShown: tipShown } };
   }
 }
 
@@ -128,6 +145,8 @@ const initialState = {
     rank: {},
     rule: {},
     suit: {},
+    tips: [],
+    tipShown: '',
     isVisible: false,
     flipped: false
   }

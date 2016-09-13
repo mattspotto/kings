@@ -65,17 +65,14 @@ export let rules = [
   },
   {
     name: 'For You',
-    tips: 2232,
     description: 'Player chooses someone to drink on their behalf'
   },
   {
     name: 'For Me',
-    tips: 2233,
     description: 'Player has to drink'
   },
   {
     name: 'Girls Drink',
-    tips: 2234,
     description: 'All girls must drink'
   },
   {
@@ -85,22 +82,18 @@ export let rules = [
   },
   {
     name: 'Dicks',
-    tips: 2236,
     description: 'All guys must drink'
   },
   {
     name: 'Heaven',
-    tips: 2237,
     description: 'When the player puts up their hand, the last person to follow must drink'
   },
   {
     name: 'Mate',
-    tips: 2238,
     description: 'Player chooses a mate that must drink every time the player drinks'
   },
   {
     name: 'Rhyme',
-    tips: 2239,
     description: 'Player chooses a word in which each player to the left must rhyme with until someone cannot think of a word'
   },
   {
@@ -120,7 +113,75 @@ export let rules = [
   },
   {
     name: 'King\'s Cup',
-    tips: 2242,
     description: 'Pour a portion of your drink into the Kings Cup'
   }
 ];
+
+export let tips = {
+  2231: [
+    {
+      tip: 'A must do a body shot off B',
+      rating: 'A'
+    },
+    {
+      tip: 'Swap shirts',
+      rating: 'A'
+    },
+    {
+      tip: 'A and B must arm wrestle and the winner must finish their drink',
+      rating: 'N'
+    }
+  ],
+  2235: [
+    {
+      tip: '... had sex in public',
+      rating: 'A'
+    },
+    {
+      tip: '... used a sex toy',
+      rating: 'A'
+    },
+    {
+      tip: '... travelled overseas',
+      rating: 'N'
+    },
+    {
+      tip: '... broken a bone',
+      rating: 'N'
+    }
+  ],
+  2240: [
+    {
+      tip: 'Olympic events',
+      rating: 'N'
+    },
+    {
+      tip: 'Alcohol brands',
+      rating: 'N'
+    }
+  ],
+  2241: [
+    {
+      tip: 'Little green man: take an invisible figure off your glass when you drink and place it back when you have finished',
+      rating: 'N'
+    },
+    {
+      tip: 'Gentleman\'s Rules: No swearing, no pointing, no first names',
+      rating: 'N'
+    },
+    {
+      tip: 'Double Tap: When you place your drink down you must tap it twice',
+      rating: 'N'
+    }
+  ],
+  2242: [
+    {
+      tip: 'What does this card do again?',
+      rating: 'N'
+    },
+    {
+      tip: 'What time is it?',
+      rating: 'N'
+    }
+  ]
+};

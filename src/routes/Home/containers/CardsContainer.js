@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { initCards, shuffleCards, flipCard, hideLastFlipped } from '../modules/cards'
+import { initCards, shuffleCards, flipCard, hideLastFlipped, showTip } from '../modules/cards'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -16,7 +16,8 @@ const mapDispatchToProps = {
   initCards,
   shuffleCards,
   flipCard,
-  hideLastFlipped
+  hideLastFlipped,
+  showTip
 }
 
 const mapStateToProps = (state) => ({

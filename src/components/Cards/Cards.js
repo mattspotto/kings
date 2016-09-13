@@ -40,6 +40,8 @@ export const Cards = (props) => (
         suit={props.cards.lastFlipped.suit}
         rank={props.cards.lastFlipped.rank}
         rule={props.cards.lastFlipped.rule}
+        tipShown={props.cards.lastFlipped.tipShown}
+        showTip={ () => props.showTip() }
       />
     </Modal>
   </div>
@@ -50,7 +52,8 @@ Cards.propTypes = {
   initCards: React.PropTypes.func.isRequired,
   shuffleCards: React.PropTypes.func.isRequired,
   hideLastFlipped: React.PropTypes.func.isRequired,
-  flipCard: React.PropTypes.func.isRequired
+  flipCard: React.PropTypes.func.isRequired,
+  showTip: React.PropTypes.func.isRequired
 }
 
 export default Cards
