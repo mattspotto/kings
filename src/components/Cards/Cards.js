@@ -49,6 +49,7 @@ export const Cards = (props) => (
 
 Cards.propTypes = {
   cards: React.PropTypes.object.isRequired,
+  settings: React.PropTypes.object.isRequired,
   initCards: React.PropTypes.func.isRequired,
   shuffleCards: React.PropTypes.func.isRequired,
   hideLastFlipped: React.PropTypes.func.isRequired,

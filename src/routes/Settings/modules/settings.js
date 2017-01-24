@@ -7,9 +7,11 @@ import {
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const SELECT_CARDS = 'SELECT_CARDS'
-export const SELECT_DECK = 'SELECT_DECK'
-export const SELECT_TABLE = 'SELECT_TABLE'
+export const SELECT_CARDS = 'SELECT_CARDS';
+export const SELECT_DECK = 'SELECT_DECK';
+export const SELECT_TABLE = 'SELECT_TABLE';
+export const TOGGLE_TIMER = 'TOGGLE_TIMER';
+export const TOGGLE_END_ON_LAST_KING = 'TOGGLE_END_ON_LAST_KING';
 
 // ------------------------------------
 // Actions
@@ -35,29 +37,24 @@ export function selectTable (value) {
   }
 }
 
-/*  This is a thunk, meaning it is a function that immediately
-    returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk!
+export function toggleTimer () {
+  return {
+    type: TOGGLE_TIMER
+  }
+}
 
-    NOTE: This is solely for demonstration purposes. In a real application,
-    you'd probably want to dispatch an action of SETTINGS_DOUBLE and let the
-    reducer take care of this logic.  */
-
-export const doubleAsync = () => {
-  return (dispatch, getState) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        dispatch(increment(getState().settings))
-        resolve()
-      }, 200)
-    })
+export function toggleEndOnLastKing () {
+  return {
+    type: TOGGLE_END_ON_LAST_KING
   }
 }
 
 export const actions = {
   selectCards,
   selectDeck,
-  selectTable
+  selectTable,
+  toggleTimer,
+  toggleEndOnLastKing
 }
 
 // ------------------------------------
@@ -65,13 +62,33 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [SELECT_CARDS]: (state, action) => {
-    return { ...state, cardsSelected: action };
+    return {
+      ...state,
+      cardsSelected: state.cards[action.payload]
+    };
   },
   [SELECT_DECK]: (state, action) => {
-      return { ...state, deckSelected: action };
+      console.log(action);
+      return {
+        ...state,
+        deckSelected: state.deck[action.payload]
+      };
   },
   [SELECT_TABLE]: (state, action) => {
-    return { ...state, tableSelected: action };
+    console.log(action.payload);
+    return {
+      ...state,
+      tableSelected: state.table[action.payload]
+    };
+  },
+  [TOGGLE_TIMER]: (state) => {
+    console.log(state);
+    console.log('TOGGLE_TIMER', state.timer);
+    return { ...state, timer: !state.timer };
+  },
+  [TOGGLE_END_ON_LAST_KING]: (state) => {
+    console.log('TOGGLE_END_ON_LAST_KING', state.endOnLast);
+    return { ...state, endOnLast: !state.endOnLast };
   }
 }
 
@@ -84,7 +101,9 @@ const initialState = {
   deck: deck,
   deckSelected: deck[0],
   table: table,
-  tableSelected: table[0]
+  tableSelected: table[0],
+  timer: false,
+  endOnLast: false
 };
 export default function settingsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
