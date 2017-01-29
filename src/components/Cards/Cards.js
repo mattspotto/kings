@@ -26,6 +26,7 @@ export const Cards = (props) => (
           symbol={card.suit.symbol}
           suit={card.suit.name}
           flipped={card.flipped}
+          cardBack={props.settings.cardsSelected.id}
           onClick={() => props.flipCard(card.key)}
         />
       )}

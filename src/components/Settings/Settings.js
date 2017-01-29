@@ -27,10 +27,10 @@ export const Settings = (props) => (
       <label>
         Cards
         <select
-          value={props.settings.cards.indexOf(props.settings.cardsSelected)}
+          value={props.settings.cards.map(x => x.id).indexOf(props.settings.cardsSelected.id)}
           onChange={(event, value) => props.selectCards(event.target.value)}>
           {props.settings.cards.map((card, i) =>
-            <option key={i} value={i}>{card}</option>
+            <option key={i} value={i}>{card.name}</option>
           )}
         </select>
       </label>

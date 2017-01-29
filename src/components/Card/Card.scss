@@ -14,8 +14,20 @@
 }
 
 .card.back {
-   background: url(img/card-back.png) no-repeat;
+   background-repeat: no-repeat;
    background-size: cover;
+}
+
+.bicycle {
+  background-image: url(img/card-back-bicycle.png);
+}
+
+.cavern {
+  background-image: url(img/card-back-cavern.png);
+}
+
+.dankred {
+  background-image: url(img/card-back-dankred.png);
 }
 
 .card .back {

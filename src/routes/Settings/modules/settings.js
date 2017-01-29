@@ -105,6 +105,7 @@ const initialState = {
   timer: false,
   endOnLast: false
 };
+
 export default function settingsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

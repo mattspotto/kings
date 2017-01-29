@@ -20,8 +20,12 @@ const mapDispatchToProps = {
   showTip
 }
 
-const mapStateToProps = (state) => ({
-    cards: state.cards
-});
+const mapStateToProps = (state) => {
+  console.log(state);
+  return ({
+      cards: state.cards,
+      settings: state.settings
+  });
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cards)

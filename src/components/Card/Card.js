@@ -8,7 +8,7 @@ export const Card = (props) => (
       : classes.unflipped)}>
       <div className={classes.card + " " + (props.flipped
         ? (classes.front + " ")
-        : (classes.back + " ")) + classes[props.suit]} onClick={props.onClick}>
+        : (classes.back + " " + classes[props.cardBack] + " ")) + classes[props.suit]} onClick={props.onClick}>
         <div className={classes.cardContents}>
           <div className={classes.corner + " " + classes.top}>
             <span className={classes.number}>{props.rank}</span>
@@ -33,6 +33,7 @@ Card.propTypes = {
   symbol: React.PropTypes.string.isRequired,
   suit: React.PropTypes.string.isRequired,
   flipped: React.PropTypes.bool.isRequired,
+  cardBack: React.PropTypes.string.isRequired,
   onClick: React.PropTypes.func.isRequired
 }
 

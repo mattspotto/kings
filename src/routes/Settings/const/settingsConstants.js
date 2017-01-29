@@ -11,7 +11,16 @@ export let table = [
 ];
 
 export let cards = [
-  'Cavern',
-  'Bicycle',
-  'Dank Red'
+  {
+    name: 'Cavern',
+    id: 'cavern'
+  },
+  {
+    name: 'Bicycle',
+    id: 'bicycle'
+  },
+  {
+    name: 'Dank Red',
+    id: 'dankred'
+  }
 ];
