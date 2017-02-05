@@ -57,65 +57,106 @@ export let ranks = [
     }
 ];
 
-export let rules = [
-  {
+export let decks = {
+  Classic: {
+    rules: [
+      "aAndB",
+      "forYou",
+      "forMe",
+      "girlsDrink",
+      "neverHaveIEver",
+      "dicks",
+      "heaven",
+      "mate",
+      "rhyme",
+      "categories",
+      "makeARule",
+      "questionMaster",
+      "kingsCup"
+    ],
+    rating: 1
+  },
+  ringOfFire: {
+    rules: [],
+    rating: 1
+  },
+  daBoiz: {
+    rules: [],
+    rating: 1
+  },
+  pro: {
+    rules: [],
+    rating: 2
+  },
+  xxx: {
+    rules: [],
+    rating: 3
+  },
+  girlsStuff: {
+    rules: [],
+    rating: 1
+  }
+}
+
+export let rules = {
+  aAndB: {
     name: 'A & B',
     tips: 2231,
     description: 'Player chooses a dare for A & B to participate in'
   },
-  {
+  forYou: {
     name: 'For You',
     description: 'Player chooses someone to drink on their behalf'
   },
-  {
+  forMe: {
     name: 'For Me',
     description: 'Player has to drink'
   },
-  {
+  girlsDrink: {
     name: 'Girls Drink',
     description: 'All girls must drink'
   },
-  {
+  neverHaveIEver: {
     name: 'Never Have I Ever',
     tips: 2235,
     description: 'Hold up 3 fingers, say something you haven\'t done and whover has done it must drink and put a finger down'
   },
-  {
+  dicks: {
     name: 'Dicks',
     description: 'All guys must drink'
   },
-  {
+  heaven: {
     name: 'Heaven',
     description: 'When the player puts up their hand, the last person to follow must drink'
   },
-  {
+  mate: {
     name: 'Mate',
     description: 'Player chooses a mate that must drink every time the player drinks'
   },
-  {
+  rhyme: {
     name: 'Rhyme',
     description: 'Player chooses a word in which each player to the left must rhyme with until someone cannot think of a word'
   },
-  {
+  categories: {
     name: 'Categories',
     tips: 2240,
     description: 'Pick a category of things, then go round the circle and whoever can\'t think of a related thing must drink'
   },
-  {
+  makeARule: {
     name: 'Make a Rule',
     tips: 2241,
     description: 'Player creates a rule that must be adhered to for the rest of the game'
   },
-  {
+  questionMaster: {
     name: 'Question Master',
     tips: 2242,
     description: 'Whoever answers the player\'s  question must drink'
   },
-  {
+  kingsCup: {
     name: 'King\'s Cup',
     description: 'Pour a portion of your drink into the Kings Cup'
   }
-];
+};
 
 export let tips = {
   2231: [
