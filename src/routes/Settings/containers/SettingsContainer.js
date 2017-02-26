@@ -26,9 +26,16 @@ const mapDispatchToProps = {
   toggleEndOnLastKing
 }
 
-const mapStateToProps = (state) => ({
-  settings: state.settings
-})
+// const mapStateToProps = (state) => ({
+//   settings: state.settings
+// });
+
+const mapStateToProps = (state) => {
+  console.log('mapStateToProps state', state);
+  return ({
+    settings: state.settings
+  });
+};
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
 

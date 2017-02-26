@@ -57,47 +57,6 @@ export let ranks = [
     }
 ];
 
-export let decks = {
-  Classic: {
-    rules: [
-      "aAndB",
-      "forYou",
-      "forMe",
-      "girlsDrink",
-      "neverHaveIEver",
-      "dicks",
-      "heaven",
-      "mate",
-      "rhyme",
-      "categories",
-      "makeARule",
-      "questionMaster",
-      "kingsCup"
-    ],
-    rating: 1
-  },
-  ringOfFire: {
-    rules: [],
-    rating: 1
-  },
-  daBoiz: {
-    rules: [],
-    rating: 1
-  },
-  pro: {
-    rules: [],
-    rating: 2
-  },
-  xxx: {
-    rules: [],
-    rating: 3
-  },
-  girlsStuff: {
-    rules: [],
-    rating: 1
-  }
-}
-
 export let rules = {
   aAndB: {
     name: 'A & B',

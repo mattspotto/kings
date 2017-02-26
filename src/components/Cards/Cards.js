@@ -1,52 +1,54 @@
-import React from 'react'
+import React from 'react';
 import Modal from 'react-modal';
-import classes from './Cards.scss'
-import Card from '../Card'
-import Jug from '../Jug'
-import CardFlipped from '../CardFlipped'
+import classes from './Cards.scss';
+import Card from '../Card';
+import Jug from '../Jug';
+import CardFlipped from '../CardFlipped';
 
-export const Cards = (props) => (
-  <div>
-    <button className='btn btn-default' onClick={props.initCards}>
-      Start Game
-    </button>
+class Cards extends React.Component {
+  constructor(props) {
+    super(props);
+    // this.state = {};
+  }
 
-    <button className='btn btn-default' onClick={props.shuffleCards}>
-      Shuffle Cards
-    </button>
+  render() {
+    return (
+      <div>
+        <button className='btn btn-default' onClick={this.props.initCards}>
+          Deal Cards
+        </button>
 
-    <Jug kingsFlipped={props.cards.kingsFlipped} />
+        <button className='btn btn-default' onClick={this.props.shuffleCards}>
+          Shuffle Cards
+        </button>
 
-    <div className={classes.circleContainer}>
-      {props.cards.cards.map((card, i) =>
-        <Card
-          key={card.key}
-          rank={card.rank.symbol}
-          textRank={card.rank.name}
-          symbol={card.suit.symbol}
-          suit={card.suit.name}
-          flipped={card.flipped}
-          cardBack={props.settings.cardsSelected.id}
-          onClick={() => props.flipCard(card.key)}
-        />
-      )}
-    </div>
+        <Jug kingsFlipped={this.props.cards.kingsFlipped} />
 
-    <Modal
-      isOpen={props.cards.lastFlipped.isVisible}
-      onRequestClose={() => props.hideLastFlipped()}
-      className={classes.flippedCard}
-    >
-      <CardFlipped
-        suit={props.cards.lastFlipped.suit}
-        rank={props.cards.lastFlipped.rank}
-        rule={props.cards.lastFlipped.rule}
-        tipShown={props.cards.lastFlipped.tipShown}
-        showTip={ () => props.showTip() }
-      />
-    </Modal>
-  </div>
-)
+        <div className={classes.circleContainer}>
+          {this.props.cards.cards.map((card, i) => {
+            const props = Object.assign({}, {
+              cardBack: this.props.settings.cardsSelected.id,
+              onClick: () => this.props.flipCard(card.key)
+            }, card);
+            
+            return <Card {...props} />;
+          })}
+        </div>
+
+        <Modal
+          isOpen={this.props.cards.lastFlipped.isVisible}
+          onRequestClose={() => this.props.hideLastFlipped()}
+          className={classes.flippedCard}
+        >
+          <CardFlipped {...this.props.cards.lastFlipped}
+            tipShown={this.props.cards.lastFlipped.tipShown}
+            showTip={ () => this.props.showTip() }
+          />
+        </Modal>
+      </div>
+    );
+  }
+};
 
 Cards.propTypes = {
   cards: React.PropTypes.object.isRequired,
@@ -58,4 +60,4 @@ Cards.propTypes = {
   showTip: React.PropTypes.func.isRequired
 }
 
-export default Cards
+export default Cards;

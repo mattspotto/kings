@@ -1,81 +1,88 @@
-import React from 'react'
-import classes from './Settings.scss'
+import React from 'react';
+import classes from './Settings.scss';
 
+class Settings extends React.Component {
+  constructor(props) {
+    super(props);
+    // this.state = {};
+  }
 
-export const Settings = (props) => (
-  <div>
-    <h2 className={classes.settingsContainer}>
-      Settings
-    </h2>
+  render () {
+    return (
+      <div>
+        <h2 className={classes.settingsContainer}>
+          Settings
+        </h2>
 
-    {JSON.stringify(props.settings)}
+        <div>
+          <label>
+            Deck
+            <select
+              value={this.props.settings.deckSelected}
+              onChange={(event, value) => this.props.selectDeck(event.target.value)}>
+                {Object.keys(this.props.settings.decks).map((key, index) => {
+                  const value = this.props.settings.decks[key];
+                  return <option key={index} value={key}>{value.name}</option>
+                })}
+            </select>
+          </label>
 
-    <div>
-      <label>
-        Deck
-        <select
-          value={props.settings.deck.indexOf(props.settings.deckSelected)}
-          onChange={(event, value) => props.selectDeck(event.target.value)}>
-          {props.settings.deck.map((deck, i) =>
-            <option key={i} value={i}>{deck}</option>
-          )}
-        </select>
-      </label>
+          <br />
 
-      <br />
+          <label>
+            Cards
+            <select
+              value={this.props.settings.cards.map(x => x.id).indexOf(this.props.settings.cardsSelected.id)}
+              onChange={(event, value) => this.props.selectCards(event.target.value)}>
+              {this.props.settings.cards.map((card, i) =>
+                <option key={i} value={i}>{card.name}</option>
+              )}
+            </select>
+          </label>
 
-      <label>
-        Cards
-        <select
-          value={props.settings.cards.map(x => x.id).indexOf(props.settings.cardsSelected.id)}
-          onChange={(event, value) => props.selectCards(event.target.value)}>
-          {props.settings.cards.map((card, i) =>
-            <option key={i} value={i}>{card.name}</option>
-          )}
-        </select>
-      </label>
+          <br />
 
-      <br />
+          <label>
+            Table
+            <select
+              value={this.props.settings.table.indexOf(this.props.settings.tableSelected)}
+              onChange={(event, value) => {
+                console.log(event.target.value);
+                this.props.selectTable(event.target.value);
+              }}
+            >
+              {this.props.settings.table.map((table, i) =>
+                <option key={i} value={i}>{table}</option>
+              )}
+            </select>
+          </label>
 
-      <label>
-        Table
-        <select
-          value={props.settings.table.indexOf(props.settings.tableSelected)}
-          onChange={(event, value) => {
-            console.log(event.target.value);
-            props.selectTable(event.target.value);
-          }}
-        >
-          {props.settings.table.map((table, i) =>
-            <option key={i} value={i}>{table}</option>
-          )}
-        </select>
-      </label>
+          <br />
 
-      <br />
+          <label>
+            <input
+              type="checkbox"
+              checked={this.props.settings.timer}
+              onChange={() => this.props.toggleTimer()}
+            />
+          Timer {this.props.settings.timer ? 'on' : 'off'}
+          </label>
 
-      <label>
-        <input
-          type="checkbox"
-          checked={props.settings.timer}
-          onChange={() => props.toggleTimer()}
-        />
-        Timer {props.settings.timer ? 'on' : 'off'}
-      </label>
+          <br />
 
-      <br />
-
-      <label>
-        <input
-          type="checkbox"
-          checked={props.settings.endOnLast}
-          onChange={() => props.toggleEndOnLastKing()}
-        />
-        End game on last king
-      </label>
-    </div>
-  </div>
-)
+          <label>
+            <input
+              type="checkbox"
+              checked={this.props.settings.endOnLast}
+              onChange={() => this.props.toggleEndOnLastKing()}
+            />
+            End game on last king
+          </label>
+        </div>
+      </div>
+    );
+  }
+}
 
 Settings.propTypes = {
   settings: React.PropTypes.object.isRequired,
@@ -86,4 +93,4 @@ Settings.propTypes = {
   toggleEndOnLastKing: React.PropTypes.func.isRequired
 }
 
-export default Settings
+export default Settings;

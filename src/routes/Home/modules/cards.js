@@ -9,6 +9,7 @@ import {
 // Constants
 // ------------------------------------
 export const INIT_CARDS = 'INIT_CARDS'
+export const INIT_CARDS_WITH_DECK = 'INIT_CARDS'
 export const SHUFFLE_CARDS = 'SHUFFLE_CARDS'
 export const FLIP_CARD = 'FLIP_CARD'
 export const HIDE_LAST_FLIPPED = 'HIDE_LAST_FLIPPED'
@@ -17,10 +18,25 @@ export const SHOW_TIP = 'SHOW_TIP'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function initCards() {
+function initCardsWithDeck(rules) {
   return {
     type: INIT_CARDS,
+    payload: rules
   }
+}
+
+export function initCards() {
+  return (dispatch, getState) => {
+    const settings = getState().settings;
+    console.log('thunk state settigns is ', settings);
+    console.log('thunk state deck is ', settings.deckSelected);
+
+    const rules = settings.decks[settings.deckSelected].rules;
+
+    console.log(rules);
+
+    dispatch(initCardsWithDeck(rules));
+  };
 }
 
 export function shuffleCards() {
@@ -61,19 +77,24 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [INIT_CARDS]: (state, action) => {
+    const gameRules = action.payload;
     let cards = [];
 
     for (var i = 0; i < ranks.length; i++) {
       for (var j = 0; j < suits.length; j++) {
         let key = 's' + i + 'c' + j;
-        cards.push({
+        const rule = rules[gameRules[i]];
+
+        const card = {
           key: key,
           rank: ranks[i],
-          rule: rules[i],
-          tips: tips[rules[i].tips],
+          rule: rule,
+          tips: tips[rule.tips],
           suit: suits[j],
           flipped: false
-        });
+        };
+
+        cards.push(card);
       }
     }
 
