@@ -12,23 +12,34 @@ class Cards extends React.Component {
   }
 
   render() {
+    const {
+      initCards,
+      shuffleCards,
+      kingsFlipped,
+      cards,
+      settings,
+      flipCard,
+      hideLastFlipped,
+      showTip
+    } = this.props;
+
     return (
-      <div>
-        <button className='btn btn-default' onClick={this.props.initCards}>
+      <div className={classes[settings.tableSelected.id]}>
+        <button className='btn btn-default' onClick={initCards}>
           Deal Cards
         </button>
 
-        <button className='btn btn-default' onClick={this.props.shuffleCards}>
+        <button className='btn btn-default' onClick={shuffleCards}>
           Shuffle Cards
         </button>
 
-        <Jug kingsFlipped={this.props.cards.kingsFlipped} />
+        <Jug kingsFlipped={cards.kingsFlipped} />
 
         <div className={classes.ovalContainer}>
-          {this.props.cards.cards.map((card, i) => {
+          {cards.cards.map((card, i) => {
             const props = Object.assign({}, {
-              cardBack: this.props.settings.cardsSelected.id,
-              onClick: () => this.props.flipCard(card)
+              cardBack: settings.cardsSelected.id,
+              onClick: () => flipCard(card)
             }, card);
 
             return <Card {...props} />;
@@ -36,13 +47,13 @@ class Cards extends React.Component {
         </div>
 
         <Modal
-          isOpen={this.props.cards.lastFlipped.isVisible}
-          onRequestClose={() => this.props.hideLastFlipped()}
+          isOpen={cards.lastFlipped.isVisible}
+          onRequestClose={() => hideLastFlipped()}
           className={classes.flippedCard}
         >
-          <CardFlipped {...this.props.cards.lastFlipped}
-            tipShown={this.props.cards.lastFlipped.tipShown}
-            showTip={ () => this.props.showTip() }
+          <CardFlipped {...cards.lastFlipped}
+            tipShown={cards.lastFlipped.tipShown}
+            showTip={ () => showTip() }
           />
         </Modal>
       </div>
