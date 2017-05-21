@@ -1,4 +1,4 @@
-export let suits = [
+export const suits = [
   {
     symbol: '♥',
     name: 'heart'
@@ -14,7 +14,7 @@ export let suits = [
   }
 ];
 
-export let ranks = [
+export const ranks = [
   {
     name: 'ace',
     symbol: 'A'
@@ -57,154 +57,7 @@ export let ranks = [
   }
 ];
 
-export let decks = {
-  Classic: {
-    rules: [
-      "waterfall",
-      "forYou",
-      "forMe",
-      "girlsDrink",
-      "neverHaveIEver",
-      "dicks",
-      "heaven",
-      "mate",
-      "rhyme",
-      "categories",
-      "makeARule",
-      "questionMaster",
-      "kingsCup"
-    ],
-    rating: 1
-  },
-  Cavern: {
-    rules: [
-      "aAndB",
-      "forYou",
-      "forMe",
-      "girlsDrink",
-      "neverHaveIEver",
-      "dicks",
-      "gecko",
-      "mate",
-      "mostLikelyToo",
-      "tenSeconds",
-      "makeARule",
-      "questionMaster",
-      "kingsCup"
-    ],
-    rating: 1
-  },
-  ringOfFire: {
-    rules: [
-      "waterfall",
-      "forYou",
-      "forMe",
-      "girlsDrink",
-      "thumbMaster",
-      "dicks",
-      "heaven",
-      "mate",
-      "rhyme",
-      "categories",
-      "makeARule",
-      "questions",
-      "kingsCup"
-    ],
-    rating: 1
-  },
-  daBoiz: {
-    rules: [
-      "waterfall",
-      "forYou",
-      "forMe",
-      "shutUp",
-      "neverHaveIEver",
-      "dicks",
-      "gecko",
-      "mate",
-      "wouldYouRather",
-      "categories",
-      "makeARule",
-      "questionMaster",
-      "kingsCup"
-    ],
-    rating: 1
-  },
-  pro: {
-    rules: [
-      "pissPass",
-      "forYou",
-      "forMe",
-      "mostLikelyToo",
-      "neverHaveIEver",
-      "tellTheTruth",
-      "gecko",
-      "mate",
-      "wouldYouRather",
-      "shoppingList",
-      "makeARule",
-      "questionMaster",
-      "kingsCup"
-    ],
-    rating: 2
-  },
-  hardcore: {
-    rules: [
-      "aAndB",
-      "finish",
-      "itemClothing",
-      "truthDare",
-      "neverHaveIEver",
-      "tellTheTruth",
-      "mostLikelyToo",
-      "mate",
-      "hotSeat",
-      "tenSeconds",
-      "makeARule",
-      "questionMaster",
-      "kingsCup"
-    ],
-    rating: 2
-  },
-  xxx: {
-    rules: [
-      "aAndB",
-      "finish",
-      "itemClothing",
-      "truthDare",
-      "neverHaveIEver",
-      "tellTheTruth",
-      "mostLikelyToo",
-      "truth",
-      "hotSeat",
-      "tenSeconds",
-      "makeARule",
-      "dare",
-      "kingsCup"
-    ],
-    rating: 3
-  },
-  girlsStuff: {
-    rules: [
-      "waterfall",
-      "forYou",
-      "forMe",
-      "girlsDrink",
-      "neverHaveIEver",
-      "mostLikelyToo",
-      "heaven",
-      "tellTheTruth",
-      "wouldILie",
-      "hotSeat",
-      "makeARule",
-      "questions",
-      "kingsCup"
-    ],
-    rating: 2
-  }
-}
-
-export let rules = {
+export const rules = {
   aAndB: {
     name: 'A & B',
     tips: 'aAndB',

@@ -13,13 +13,19 @@
   $nb-items,
   $circle-size,
   $item-size,
+  $oval: false,
   $class-for-IE: false
 ) {
+
+  position: relative; /* 1 */
+  // @if $oval {
+  //   $circle-size: $circle-size / 2;
+  // }
+
   $half-item: ($item-size / 2);
   $half-parent: ($circle-size / 2);
 
-  position: relative; /* 1 */
-  width:  $circle-size;
+  width:  $circle-size / 2;
   height: $circle-size;
   padding: 0;
   border-radius: 50%;
@@ -42,7 +48,7 @@
   @for $i from 1 through $nb-items {
     @if not $class-for-IE {
       > :nth-of-type(#{$i}) {
-        //transform: rotate($rot * 1deg) translate($half-parent) rotate($rot * -1deg);
+        // transform: rotate($rot * 1deg) translate($half-parent) rotate($rot * -1deg);
         $rand: (random(20) - 10);
         transform: rotate($rot * 1deg) translate($half-parent) rotate(90deg + $rand);
       }
@@ -61,8 +67,13 @@
 }
 
 .circleContainer {
-  @include distribute-on-circle(52, 40em, 5em, false);
-  margin: 5em auto 0;
+  @include distribute-on-circle(52, 420px, 70px, false, false);
+  margin: 50px auto 0;
+}
+
+.ovalContainer {
+  @include distribute-on-circle(52, 420px, 70px, true, false);
+  margin: 50px auto 0;
 }
 
 .cardShownContainer {

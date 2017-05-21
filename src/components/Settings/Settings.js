@@ -18,11 +18,11 @@ class Settings extends React.Component {
           <label>
             Deck
             <select
-              value={this.props.settings.deckSelected}
+              value={this.props.settings.deckSelected.name}
               onChange={(event, value) => this.props.selectDeck(event.target.value)}>
-                {Object.keys(this.props.settings.decks).map((key, index) => {
-                  const value = this.props.settings.decks[key];
-                  return <option key={index} value={key}>{value.name}</option>
+                {Object.keys(this.props.settings.decks).map((deck, i) => {
+                  const value = this.props.settings.decks[deck];
+                  return <option key={i} value={value.id}>{value.name}</option>
                 })}
             </select>
           </label>
@@ -45,14 +45,14 @@ class Settings extends React.Component {
           <label>
             Table
             <select
-              value={this.props.settings.table.indexOf(this.props.settings.tableSelected)}
+              value={this.props.settings.table.map(x => x.id).indexOf(this.props.settings.tableSelected.id)}
               onChange={(event, value) => {
                 console.log(event.target.value);
                 this.props.selectTable(event.target.value);
               }}
             >
               {this.props.settings.table.map((table, i) =>
-                <option key={i} value={i}>{table}</option>
+                <option key={i} value={i}>{table.name}</option>
               )}
             </select>
           </label>

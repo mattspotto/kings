@@ -1,9 +1,9 @@
 import {
   suits,
   ranks,
-  rules,
-  tips
+  rules
 } from '../const/cardConstants.js';
+import { tips } from '../const/tipsConstant';
 
 // ------------------------------------
 // Constants
@@ -28,12 +28,7 @@ function initCardsWithDeck(rules) {
 export function initCards() {
   return (dispatch, getState) => {
     const settings = getState().settings;
-    console.log('thunk state settigns is ', settings);
-    console.log('thunk state deck is ', settings.deckSelected);
-
     const rules = settings.decks[settings.deckSelected].rules;
-
-    console.log(rules);
 
     dispatch(initCardsWithDeck(rules));
   };
@@ -45,12 +40,35 @@ export function shuffleCards() {
   }
 }
 
-export function flipCard(card) {
+export function flipNextCard(card) {
   return {
     type: FLIP_CARD,
     payload: card
   }
 }
+
+export function flipCard(card) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const endOnLast = state.settings.endOnLast;
+    const kingsFlipped = state.cards.kingsFlipped;
+
+    console.log('card', card);
+    console.log('endOnLast', endOnLast);
+    console.log('kingsFlipped', kingsFlipped);
+
+    if (card.rank.symbol === 'K' &&
+      endOnLast &&
+      kingsFlipped === 3
+    ) {
+      alert("Game over");
+      return;
+    } else {
+      dispatch(flipNextCard(card));
+    }
+  };
+}
+
 
 export function hideLastFlipped() {
   return {
@@ -103,16 +121,12 @@ const ACTION_HANDLERS = {
   [SHUFFLE_CARDS]: (state, action) => {
 
     let cards = state.cards;
-    //let cards = newState.cards;
-
-    console.log(state);
-    //console.log(newState);
-    console.log(cards);
 
     // shuffle the cards
-    var currentIndex = cards.length;
-    var tempValue,
+    let currentIndex = cards.length;
+    let tempValue,
       randomIndex;
+
     while (0 !== currentIndex) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
@@ -120,13 +134,18 @@ const ACTION_HANDLERS = {
       cards[currentIndex] = cards[randomIndex];
       cards[randomIndex] = tempValue;
     }
+
     return { ...state, cards: cards };
   },
   [FLIP_CARD]: (state, action) => {
 
     let cards = state.cards;
     let kingsFlipped = state.kingsFlipped;
-    let card = cards.find(card => card.key === action.payload);
+    // let card = cards.find(card => card.key === action.payload.card.key);
+    let card = action.payload;
+
+    console.log('FLIP_CARD card2', card);
+
     card.flipped = true;
 
     console.log(card.tips);

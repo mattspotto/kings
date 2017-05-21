@@ -24,13 +24,13 @@ class Cards extends React.Component {
 
         <Jug kingsFlipped={this.props.cards.kingsFlipped} />
 
-        <div className={classes.circleContainer}>
+        <div className={classes.ovalContainer}>
           {this.props.cards.cards.map((card, i) => {
             const props = Object.assign({}, {
               cardBack: this.props.settings.cardsSelected.id,
-              onClick: () => this.props.flipCard(card.key)
+              onClick: () => this.props.flipCard(card)
             }, card);
-            
+
             return <Card {...props} />;
           })}
         </div>

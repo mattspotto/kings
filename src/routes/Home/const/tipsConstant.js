@@ -1,4 +1,4 @@
-export let tips = {
+export const tips = {
   aAndB:[
     {
       tip: 'Stare into eachothers eyes for the round. Drink whenever; eye contact is broken or you laugh',
@@ -629,9 +629,11 @@ export let tips = {
     {
       tip: 'Finish your drink while humming the national anthem',
       rating:  1
-    }
-  ],
-  Potion; every else concoct a drink or meal for you to eat, 2[
+    },
+    {
+      tip: 'Potion: every else concoct a drink or meal for you to eat',
+      rating: 2
+    },
     {
       tip: 'Cup of milk and alcohol',
       rating:  2

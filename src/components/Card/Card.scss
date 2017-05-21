@@ -19,15 +19,23 @@
 }
 
 .bicycle {
-  background-image: url(img/card-back-bicycle.png);
+  background-image: url(img/card-backs/bicycle.png);
 }
 
 .cavern {
-  background-image: url(img/card-back-cavern.png);
+  background-image: url(img/card-backs/cavern.png);
 }
 
-.dankred {
-  background-image: url(img/card-back-dankred.png);
+.dank-red {
+  background-image: url(img/card-backs/dank-red.png);
+}
+
+.dank-blue {
+  background-image: url(img/card-backs/dank-blue.png);
+}
+
+.dank-cavern {
+  background-image: url(img/card-backs/dank-cavern.png);
 }
 
 .card .back {

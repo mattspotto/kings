@@ -7,6 +7,8 @@ export const Jug = (props) => (
   <div className={classes.jug}>
     <div className={classes.glass}>
       <div className={classes.water + " " + classes[numKingsClassName[props.kingsFlipped]]}></div>
+
+      <div className={classes.glassEffect}></div>
     </div>
   </div>
 )
