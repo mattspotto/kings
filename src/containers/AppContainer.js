@@ -25,11 +25,12 @@ class AppContainer extends Component {
         <div id="outer-container">
           <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
             <div className="menu-item">
-              <a className="menu-link" onClick={ (e) => this.handleClick(e, "/settings") }>Settings</a>                
+              <a className="menu-link" onClick={ (e) => this.handleClick(e, "/") }>Play</a>
+              <a className="menu-link" onClick={ (e) => this.handleClick(e, "/settings") }>Settings</a>
             </div>
           </Menu>
-          
-          <main id="page-wrap">              
+
+          <main id="page-wrap">
             <Router history={history} children={routes} />
           </main>
         </div>

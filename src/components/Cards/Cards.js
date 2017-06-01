@@ -24,14 +24,16 @@ class Cards extends React.Component {
     } = this.props;
 
     return (
-      <div className={classes[settings.tableSelected.id]}>
-        <button className='btn btn-default' onClick={initCards}>
-          Deal Cards
-        </button>
+      <div className={`${classes.base} ${classes[settings.tableSelected.id]}`}>
+        <div className="container has-text-centered">
+          <button className='button is-primary' onClick={initCards}>
+            Deal Cards
+          </button>
 
-        <button className='btn btn-default' onClick={shuffleCards}>
-          Shuffle Cards
-        </button>
+          <button className='button is-primary' onClick={shuffleCards}>
+            Shuffle Cards
+          </button>
+        </div>
 
         <Jug kingsFlipped={cards.kingsFlipped} />
 
