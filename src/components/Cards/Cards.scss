@@ -1,5 +1,7 @@
 .base {
-  height: 100%;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }
 /// Mixin to put items on a circle
 /// [1] - Allows children to be absolutely positioned
@@ -101,21 +103,4 @@
   border-radius: 8px;
   padding: 10px;
   outline: none;
-}
-
-.felt {
-  background: red;
-  background: url('../../img/backgrounds/felt.png');
-}
-
-.red-felt {
-  background: url('../../img/backgrounds/redfelt.png');
-}
-
-.green-felt {
-  background: url('../../img/backgrounds/bg.png');
-}
-
-.wood {
-  background: url('../../img/backgrounds/wood.png');
 }

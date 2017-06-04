@@ -1,5 +1,6 @@
-import React from 'react'
-import classes from './CardFlipped.scss'
+import React from 'react';
+import FaHandORight from 'react-icons/lib/fa/hand-o-right';
+import classes from './CardFlipped.scss';
 
 class CardFlipped extends React.Component {
   constructor(props) {
@@ -8,18 +9,30 @@ class CardFlipped extends React.Component {
   }
 
   renderTips() {
+    const { tipShown, showTip } = this.props;
+    let tipsEl = null;
+
+    if (tipShown) {
+      tipsEl = (
+        <div className="notification is-primary">
+          <button className="delete"></button>
+
+          {this.props.tipShown}
+        </div>
+      );
+    }
+
     return (
       <div className={classes.tipButton}>
         <button
           type="button"
-          className="btn btn-default btn-lg"
+          className="button is-light is-medium"
           onClick={ () => this.props.showTip() }
         >
-          <span className="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Tip
+          <FaHandORight />&nbsp; Tip
         </button>
-        <div className={classes.tipShown}>
-          {this.props.tipShown}
-        </div>
+
+        {tipsEl}
       </div>
     );
   }
