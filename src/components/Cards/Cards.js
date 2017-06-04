@@ -68,18 +68,21 @@ class Cards extends React.Component {
           </div>
 
           <div className="hero-foot">
-            <nav className="tabs is-boxed is-fullwidth">
-              <div className="container">
-                <ul>
-                  <li className="is-active"><a>Overview</a></li>
-                  <li><a>Modifiers</a></li>
-                  <li><a>Grid</a></li>
-                  <li><a>Elements</a></li>
-                  <li><a>Components</a></li>
-                  <li><a>Layout</a></li>
-                </ul>
-              </div>
-            </nav>
+            <div className="container">
+              <nav className={`level is-mobile ${classes.footer}`}>
+                <div className="level-left">
+                  <div className="level-item">
+                    <p className="subtitle is-5">
+                      <strong>3</strong> Kings
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="level-right">
+                    <p className="level-item"><a className="button is-primary">New Game</a></p>
+                  </div>
+                </nav>
+            </div>
           </div>
         </div>
       </section>

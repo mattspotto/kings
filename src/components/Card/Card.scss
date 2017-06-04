@@ -49,6 +49,10 @@
 .card.diamond {
     color: red;
 }
+.card.spade,
+.card.club {
+    color: black;
+}
 .card .corner {
     line-height: 1;
     overflow: hidden;
