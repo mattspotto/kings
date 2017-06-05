@@ -15,8 +15,6 @@ class Cards extends React.Component {
   render() {
     const {
       initCards,
-      shuffleCards,
-      kingsFlipped,
       cards,
       settings,
       flipCard,
@@ -31,16 +29,6 @@ class Cards extends React.Component {
         <div className={`${classes.base} ${settings.tableSelected.id}`}>
           <div className="hero-body">
             <div className="container has-text-centered">
-              <div className="container has-text-centered">
-                <button className='button is-primary' onClick={initCards}>
-                  Deal Cards
-                </button>
-
-                <button className='button is-primary' onClick={shuffleCards}>
-                  Shuffle Cards
-                </button>
-              </div>
-
               <Jug kingsFlipped={cards.kingsFlipped} />
 
               <div className={classes.ovalContainer}>
@@ -73,13 +61,15 @@ class Cards extends React.Component {
                 <div className="level-left">
                   <div className="level-item">
                     <p className="subtitle is-5">
-                      <strong>3</strong> Kings
+                      <strong>{cards.kingsFlipped}</strong> Kings
                       </p>
                     </div>
                   </div>
 
                   <div className="level-right">
-                    <p className="level-item"><a className="button is-primary">New Game</a></p>
+                    <p className="level-item">
+                      <a className="button is-primary" onClick={initCards}>New Game</a>
+                    </p>
                   </div>
                 </nav>
             </div>
@@ -94,7 +84,6 @@ Cards.propTypes = {
   cards: React.PropTypes.object.isRequired,
   settings: React.PropTypes.object.isRequired,
   initCards: React.PropTypes.func.isRequired,
-  shuffleCards: React.PropTypes.func.isRequired,
   hideLastFlipped: React.PropTypes.func.isRequired,
   flipCard: React.PropTypes.func.isRequired,
   showTip: React.PropTypes.func.isRequired

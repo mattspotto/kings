@@ -116,12 +116,6 @@ const ACTION_HANDLERS = {
       }
     }
 
-    return { ...state, cards: cards };
-  },
-  [SHUFFLE_CARDS]: (state, action) => {
-
-    let cards = state.cards;
-
     // shuffle the cards
     let currentIndex = cards.length;
     let tempValue,
