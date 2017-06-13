@@ -4,7 +4,9 @@ import {
   shuffleCards,
   flipCard,
   hideLastFlipped,
-  showTip
+  showTip,
+  hideTip,
+  hideGameOver
 } from '../modules/cards'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -23,15 +25,14 @@ const mapDispatchToProps = {
   shuffleCards,
   flipCard,
   hideLastFlipped,
-  showTip
+  showTip,
+  hideTip,
+  hideGameOver
 }
 
-const mapStateToProps = (state) => {
-  console.log("mapStateToProps", state);
-  return ({
-      cards: state.cards,
-      settings: state.settings
-  });
-};
+const mapStateToProps = (state) => ({
+  cards: state.cards,
+  settings: state.settings
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cards)

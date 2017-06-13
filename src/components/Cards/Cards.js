@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
+import cx from 'classnames';
 import Modal from 'react-modal';
 import Header from '../Header';
 import classes from './Cards.scss';
@@ -6,7 +7,7 @@ import Card from '../Card';
 import Jug from '../Jug';
 import CardFlipped from '../CardFlipped';
 
-class Cards extends React.Component {
+class Cards extends Component {
   constructor(props) {
     super(props);
     // this.state = {};
@@ -19,16 +20,38 @@ class Cards extends React.Component {
       settings,
       flipCard,
       hideLastFlipped,
-      showTip
+      showTip,
+      hideTip,
+      hideGameOver
     } = this.props;
+
+    let gameOverModal = null;
+
+    if (cards.isGameOver) {
+      gameOverModal = (
+        <div className="notification is-warning">
+          <button className="delete"
+            onClick={() => hideGameOver()}>
+          </button>
+
+          Game Over
+        </div>
+      );
+    }
 
     return (
       <section className="hero is-primary is-fullheight">
         <Header />
 
         <div className={`${classes.base} ${settings.tableSelected.id}`}>
-          <div className="hero-body">
+          <div className={`hero-body ${classes.cardsHero}`}>
             <div className="container has-text-centered">
+              <div className="columns is-mobile">
+                <div className="column is-one-third is-offset-one-third">
+                  {gameOverModal}
+                </div>
+              </div>
+
               <Jug kingsFlipped={cards.kingsFlipped} />
 
               <div className={classes.ovalContainer}>
@@ -50,6 +73,7 @@ class Cards extends React.Component {
                 <CardFlipped {...cards.lastFlipped}
                   tipShown={cards.lastFlipped.tipShown}
                   showTip={ () => showTip() }
+                  hideTip={ () => hideTip() }
                 />
               </Modal>
             </div>
@@ -81,12 +105,14 @@ class Cards extends React.Component {
 };
 
 Cards.propTypes = {
-  cards: React.PropTypes.object.isRequired,
-  settings: React.PropTypes.object.isRequired,
-  initCards: React.PropTypes.func.isRequired,
-  hideLastFlipped: React.PropTypes.func.isRequired,
-  flipCard: React.PropTypes.func.isRequired,
-  showTip: React.PropTypes.func.isRequired
+  cards: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
+  initCards: PropTypes.func.isRequired,
+  hideLastFlipped: PropTypes.func.isRequired,
+  flipCard: PropTypes.func.isRequired,
+  showTip: PropTypes.func.isRequired,
+  hideTip: PropTypes.func.isRequired,
+  hideGameOver: PropTypes.func.isRequired
 }
 
 export default Cards;

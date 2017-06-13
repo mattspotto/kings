@@ -9,13 +9,15 @@ class CardFlipped extends React.Component {
   }
 
   renderTips() {
-    const { tipShown, showTip } = this.props;
+    const { tipShown, showTip, hideTip } = this.props;
     let tipsEl = null;
 
     if (tipShown) {
       tipsEl = (
         <div className="notification is-primary">
-          <button className="delete"></button>
+          <button className="delete"
+            onClick={() => hideTip()}>
+          </button>
 
           {this.props.tipShown}
         </div>
@@ -27,12 +29,14 @@ class CardFlipped extends React.Component {
         <button
           type="button"
           className="button is-light is-medium"
-          onClick={ () => this.props.showTip() }
+          onClick={() => showTip()}
         >
           <FaHandORight />&nbsp; Tip
         </button>
 
-        {tipsEl}
+        <div className="column">
+          {tipsEl}
+        </div>
       </div>
     );
   }

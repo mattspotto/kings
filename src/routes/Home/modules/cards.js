@@ -8,12 +8,15 @@ import { tips } from '../const/tipsConstant';
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const INIT_CARDS = 'INIT_CARDS'
-export const INIT_CARDS_WITH_DECK = 'INIT_CARDS'
-export const SHUFFLE_CARDS = 'SHUFFLE_CARDS'
-export const FLIP_CARD = 'FLIP_CARD'
-export const HIDE_LAST_FLIPPED = 'HIDE_LAST_FLIPPED'
-export const SHOW_TIP = 'SHOW_TIP'
+export const INIT_CARDS = 'INIT_CARDS';
+export const INIT_CARDS_WITH_DECK = 'INIT_CARDS';
+export const SHUFFLE_CARDS = 'SHUFFLE_CARDS';
+export const FLIP_CARD = 'FLIP_CARD';
+export const HIDE_LAST_FLIPPED = 'HIDE_LAST_FLIPPED';
+export const SHOW_TIP = 'SHOW_TIP';
+export const HIDE_TIP = 'HIDE_TIP';
+export const SHOW_GAME_OVER = 'SHOW_GAME_OVER';
+export const HIDE_GAME_OVER = 'HIDE_GAME_OVER';
 
 // ------------------------------------
 // Actions
@@ -47,6 +50,18 @@ export function flipNextCard(card) {
   }
 }
 
+export function showGameOver() {
+  return {
+    type: SHOW_GAME_OVER
+  }
+}
+
+export function hideGameOver() {
+  return {
+    type: HIDE_GAME_OVER
+  }
+}
+
 export function flipCard(card) {
   return (dispatch, getState) => {
     const state = getState();
@@ -59,13 +74,11 @@ export function flipCard(card) {
 
     if (card.rank.symbol === 'K' &&
       endOnLast &&
-      kingsFlipped === 3
+      kingsFlipped >= 3
     ) {
-      alert("Game over");
-      return;
-    } else {
-      dispatch(flipNextCard(card));
+      dispatch(showGameOver());
     }
+    dispatch(flipNextCard(card));
   };
 }
 
@@ -79,6 +92,12 @@ export function hideLastFlipped() {
 export function showTip() {
   return {
     type: SHOW_TIP,
+  }
+}
+
+export function hideTip() {
+  return {
+    type: HIDE_TIP,
   }
 }
 
@@ -117,17 +136,17 @@ const ACTION_HANDLERS = {
     }
 
     // shuffle the cards
-    let currentIndex = cards.length;
-    let tempValue,
-      randomIndex;
-
-    while (0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      tempValue = cards[currentIndex];
-      cards[currentIndex] = cards[randomIndex];
-      cards[randomIndex] = tempValue;
-    }
+    // let currentIndex = cards.length;
+    // let tempValue,
+    //   randomIndex;
+    //
+    // while (0 !== currentIndex) {
+    //   randomIndex = Math.floor(Math.random() * currentIndex);
+    //   currentIndex -= 1;
+    //   tempValue = cards[currentIndex];
+    //   cards[currentIndex] = cards[randomIndex];
+    //   cards[randomIndex] = tempValue;
+    // }
 
     return { ...state, cards: cards };
   },
@@ -142,30 +161,35 @@ const ACTION_HANDLERS = {
 
     card.flipped = true;
 
-    console.log(card.tips);
-
     if (card.rank.symbol === 'K') {
       kingsFlipped++;
     }
 
-    let stuff = Object.assign({}, state, {
+    return Object.assign({}, state, {
       cards: cards,
       kingsFlipped: kingsFlipped,
       lastFlipped: { ...card, isVisible: true }
     });
-    console.log(stuff);
-
-    return stuff;
   },
   [HIDE_LAST_FLIPPED]: (state, action) => {
     console.log(state);
     let lastFlipped = state.lastFlipped;
     return { ...state, lastFlipped: { ...lastFlipped, isVisible: false } };
   },
-  [SHOW_TIP]: (state, action) => {
+  [SHOW_TIP]: state => {
     let lastFlipped = state.lastFlipped;
     let tipShown = lastFlipped.tips[Math.floor(Math.random()*lastFlipped.tips.length)].tip;
     return { ...state, lastFlipped: { ...lastFlipped, tipShown: tipShown } };
+  },
+  [HIDE_TIP]: state => {
+    let lastFlipped = state.lastFlipped;
+    return { ...state, lastFlipped: { ...lastFlipped, tipShown: null } };
+  },
+  [SHOW_GAME_OVER]: state => {
+    return { ...state, isGameOver: true };
+  },
+  [HIDE_GAME_OVER]: state => {
+    return { ...state, isGameOver: false };
   }
 }
 
@@ -175,6 +199,7 @@ const ACTION_HANDLERS = {
 const initialState = {
   cards: [],
   kingsFlipped: 0,
+  isGameOver: false,
   lastFlipped: {
     rank: {},
     rule: {},

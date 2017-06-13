@@ -2,7 +2,6 @@
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  justify-content: space-between;
 }
 /// Mixin to put items on a circle
 /// [1] - Allows children to be absolutely positioned
@@ -104,6 +103,10 @@
   border-radius: 8px;
   padding: 10px;
   outline: none;
+}
+
+.cardsHero {
+  padding: 0;
 }
 
 .footer {
