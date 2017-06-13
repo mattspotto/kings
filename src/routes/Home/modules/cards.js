@@ -67,15 +67,16 @@ export function flipCard(card) {
     const state = getState();
     const endOnLast = state.settings.endOnLast;
     const kingsFlipped = state.cards.kingsFlipped;
+    const cardsFlipped = state.cards.cardsFlipped;
 
-    console.log('card', card);
-    console.log('endOnLast', endOnLast);
-    console.log('kingsFlipped', kingsFlipped);
+    if (state.cards.isGameOver) return;
 
     if (card.rank.symbol === 'K' &&
       endOnLast &&
       kingsFlipped >= 3
     ) {
+      dispatch(showGameOver());
+    } else if (cardsFlipped >= 51) {
       dispatch(showGameOver());
     }
     dispatch(flipNextCard(card));
@@ -151,13 +152,11 @@ const ACTION_HANDLERS = {
     return { ...state, cards: cards };
   },
   [FLIP_CARD]: (state, action) => {
-
-    let cards = state.cards;
     let kingsFlipped = state.kingsFlipped;
-    // let card = cards.find(card => card.key === action.payload.card.key);
+    let cardsFlipped = state.cardsFlipped + 1;
     let card = action.payload;
 
-    console.log('FLIP_CARD card2', card);
+    console.log('FLIP_CARD card', card);
 
     card.flipped = true;
 
@@ -165,14 +164,13 @@ const ACTION_HANDLERS = {
       kingsFlipped++;
     }
 
-    return Object.assign({}, state, {
-      cards: cards,
-      kingsFlipped: kingsFlipped,
+    return { ...state,
+      kingsFlipped,
+      cardsFlipped,
       lastFlipped: { ...card, isVisible: true }
-    });
+    };
   },
   [HIDE_LAST_FLIPPED]: (state, action) => {
-    console.log(state);
     let lastFlipped = state.lastFlipped;
     return { ...state, lastFlipped: { ...lastFlipped, isVisible: false } };
   },
@@ -199,6 +197,7 @@ const ACTION_HANDLERS = {
 const initialState = {
   cards: [],
   kingsFlipped: 0,
+  cardsFlipped: 0,
   isGameOver: false,
   lastFlipped: {
     rank: {},
