@@ -141,17 +141,17 @@ const ACTION_HANDLERS = {
     }
 
     // shuffle the cards
-    // let currentIndex = cards.length;
-    // let tempValue,
-    //   randomIndex;
-    //
-    // while (0 !== currentIndex) {
-    //   randomIndex = Math.floor(Math.random() * currentIndex);
-    //   currentIndex -= 1;
-    //   tempValue = cards[currentIndex];
-    //   cards[currentIndex] = cards[randomIndex];
-    //   cards[randomIndex] = tempValue;
-    // }
+    let currentIndex = cards.length;
+    let tempValue,
+      randomIndex;
+
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      tempValue = cards[currentIndex];
+      cards[currentIndex] = cards[randomIndex];
+      cards[randomIndex] = tempValue;
+    }
 
     return {
       ...state,
