@@ -41,7 +41,8 @@ export let cards = [
 ];
 
 export const decks = {
-  Classic: {
+  classic: {
+    id: 'classic',
     name: 'Classic',
     rules: [
       "waterfall",
@@ -60,7 +61,8 @@ export const decks = {
     ],
     rating: 1
   },
-  Cavern: {
+  cavern: {
+    id: 'cavern',
     name: 'Cavern',
     rules: [
       "aAndB",
@@ -80,6 +82,7 @@ export const decks = {
     rating: 1
   },
   ringOfFire: {
+    id: 'ringOfFire',
     name: 'Ring Of Fire',
     rules: [
       "waterfall",
@@ -99,6 +102,7 @@ export const decks = {
     rating: 1
   },
   daBoiz: {
+    id: 'daBoiz',
     name: 'DaBoiz',
     rules: [
       "waterfall",
@@ -118,6 +122,7 @@ export const decks = {
     rating: 1
   },
   pro: {
+    id: 'pro',
     name: 'Pro',
     rules: [
       "pissPass",
@@ -137,6 +142,7 @@ export const decks = {
     rating: 2
   },
   hardcore: {
+    id: 'hardcore',
     name: 'Hardcore',
     rules: [
       "aAndB",
@@ -156,6 +162,7 @@ export const decks = {
     rating: 2
   },
   xxx: {
+    id: 'xxx',
     name: 'XXX',
     rules: [
       "aAndB",
@@ -175,6 +182,7 @@ export const decks = {
     rating: 3
   },
   girlsStuff: {
+    id: 'girlsStuff',
     name: 'Girls Stuff',
     rules: [
       "waterfall",

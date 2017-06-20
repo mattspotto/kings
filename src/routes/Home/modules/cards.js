@@ -30,8 +30,10 @@ function initCardsWithDeck(rules) {
 
 export function initCards() {
   return (dispatch, getState) => {
-    const settings = getState().settings;
-    const rules = settings.decks[settings.deckSelected].rules;
+    const { settings } = getState();
+
+    console.log('initCards', settings);
+    const rules = settings.deckSelected.rules;
 
     dispatch(initCardsWithDeck(rules));
   };
@@ -64,12 +66,12 @@ export function hideGameOver() {
 
 export function flipCard(card) {
   return (dispatch, getState) => {
-    const state = getState();
-    const endOnLast = state.settings.endOnLast;
-    const kingsFlipped = state.cards.kingsFlipped;
-    const cardsFlipped = state.cards.cardsFlipped;
+    const { settings, cards } = getState();
+    const endOnLast = settings.endOnLast;
+    const kingsFlipped = cards.kingsFlipped;
+    const cardsFlipped = cards.cardsFlipped;
 
-    if (state.cards.isGameOver) return;
+    if (cards.isGameOver) return;
 
     if (card.rank.symbol === 'K' &&
       endOnLast &&
@@ -118,6 +120,8 @@ const ACTION_HANDLERS = {
     const gameRules = action.payload;
     let cards = [];
 
+    console.log(gameRules);
+
     for (var i = 0; i < ranks.length; i++) {
       for (var j = 0; j < suits.length; j++) {
         let key = 's' + i + 'c' + j;
@@ -149,7 +153,11 @@ const ACTION_HANDLERS = {
     //   cards[randomIndex] = tempValue;
     // }
 
-    return { ...state, cards: cards };
+    return {
+      ...state,
+      cards,
+      kingsFlipped: 0
+    };
   },
   [FLIP_CARD]: (state, action) => {
     let kingsFlipped = state.kingsFlipped;
@@ -164,7 +172,8 @@ const ACTION_HANDLERS = {
       kingsFlipped++;
     }
 
-    return { ...state,
+    return {
+      ...state,
       kingsFlipped,
       cardsFlipped,
       lastFlipped: { ...card, isVisible: true }

@@ -68,10 +68,10 @@ const ACTION_HANDLERS = {
     };
   },
   [SELECT_DECK]: (state, action) => {
-      console.log(action);
+      console.log('SELECT_DECK', action.payload);
       return {
         ...state,
-        deckSelected: action.payload
+        deckSelected: state.decks[action.payload]
       };
   },
   [SELECT_TABLE]: (state, action) => {

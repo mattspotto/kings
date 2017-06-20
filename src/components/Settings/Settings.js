@@ -43,11 +43,11 @@ class Settings extends React.Component {
                           <p className="control">
                             <span className="select is-medium">
                               <select
-                                value={settings.deckSelected.name}
-                                onChange={(event, value) => selectDeck(event.target.value)}>
+                                value={settings.deckSelected.id}
+                                onChange={({ target }) => selectDeck(target.value)}>
                                   {Object.keys(settings.decks).map((deck, i) => {
                                     const value = settings.decks[deck];
-                                    return <option key={i} value={value.id}>{value.name}</option>
+                                    return <option key={i} value={deck}>{value.name}</option>
                                   })}
                               </select>
                             </span>
