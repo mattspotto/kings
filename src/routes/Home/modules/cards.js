@@ -4,12 +4,12 @@ import {
   rules
 } from '../const/cardConstants.js';
 import { tips } from '../const/tipsConstant';
+import { start } from './timer';
 
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const INIT_CARDS = 'INIT_CARDS';
-export const INIT_CARDS_WITH_DECK = 'INIT_CARDS';
 export const SHUFFLE_CARDS = 'SHUFFLE_CARDS';
 export const FLIP_CARD = 'FLIP_CARD';
 export const HIDE_LAST_FLIPPED = 'HIDE_LAST_FLIPPED';
@@ -31,11 +31,12 @@ function initCardsWithDeck(rules) {
 export function initCards() {
   return (dispatch, getState) => {
     const { settings } = getState();
-
     console.log('initCards', settings);
     const rules = settings.deckSelected.rules;
 
     dispatch(initCardsWithDeck(rules));
+
+    dispatch(start());
   };
 }
 
@@ -104,12 +105,14 @@ export function hideTip() {
   }
 }
 
-export const actions = {
+export const cardsActions = {
   initCards,
   shuffleCards,
   flipCard,
   hideLastFlipped,
-  showTip
+  showTip,
+  hideTip,
+  hideGameOver
 }
 
 // ------------------------------------
@@ -218,7 +221,7 @@ const initialState = {
     flipped: false
   }
 };
-export default function settingsReducer(state = initialState, action) {
+export default function cardsReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

@@ -99,7 +99,7 @@ const initialState = {
   cards: cards,
   cardsSelected: cards[0],
   decks: decks,
-  deckSelected: Object.keys(decks)[0],
+  deckSelected: decks[Object.keys(decks)[0]],
   table: table,
   tableSelected: table[0],
   timer: false,

@@ -13,11 +13,28 @@ class Cards extends Component {
     // this.state = {};
   }
 
+  renderTimer() {
+    const { timer } = this.props;
+    let el = null;
+
+    if (this.props.timer.current) {
+      el = (
+        <div className="level-item">
+          <p className="subtitle is-5">
+            <strong>{timer.current}</strong> Remaining
+          </p>
+        </div>
+      )
+    }
+
+    return el;
+  }
+
   render() {
     const {
-      initCards,
       cards,
       settings,
+      initCards,
       flipCard,
       hideLastFlipped,
       showTip,
@@ -86,16 +103,18 @@ class Cards extends Component {
                   <div className="level-item">
                     <p className="subtitle is-5">
                       <strong>{cards.kingsFlipped}</strong> Kings
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="level-right">
-                    <p className="level-item">
-                      <a className="button is-primary" onClick={initCards}>New Game</a>
                     </p>
                   </div>
-                </nav>
+
+                  {this.renderTimer()}
+                </div>
+
+                <div className="level-right">
+                  <p className="level-item">
+                    <a className="button is-primary" onClick={initCards}>New Game</a>
+                  </p>
+                </div>
+              </nav>
             </div>
           </div>
         </div>
@@ -107,6 +126,7 @@ class Cards extends Component {
 Cards.propTypes = {
   cards: PropTypes.object.isRequired,
   settings: PropTypes.object.isRequired,
+  timer: PropTypes.object.isRequired,
   initCards: PropTypes.func.isRequired,
   hideLastFlipped: PropTypes.func.isRequired,
   flipCard: PropTypes.func.isRequired,
