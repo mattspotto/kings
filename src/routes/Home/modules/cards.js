@@ -33,10 +33,11 @@ export function initCards() {
     const { settings } = getState();
     console.log('initCards', settings);
     const rules = settings.deckSelected.rules;
+    const { duration, isSet } = settings.timer;
 
     dispatch(initCardsWithDeck(rules));
 
-    dispatch(start());
+    if (isSet) dispatch(start(duration));
   };
 }
 

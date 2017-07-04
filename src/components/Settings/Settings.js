@@ -9,6 +9,31 @@ class Settings extends React.Component {
     // this.state = {};
   }
 
+  renderDurationField() {
+    const { timer } = this.props.settings;
+
+    let durationField = null;
+
+    if (timer.isSet) {
+      durationField = (
+        <div className="field">
+          <label className="label">Timer Duration</label>
+
+          <p className="control">
+            <input className="input"
+              type="number"
+              placeholder="10"
+              onChange={e => this.props.setTimerDuration(parseInt(e.target.value))} />
+
+            Minutes
+          </p>
+        </div>
+      );
+    }
+
+    return durationField;
+  }
+
   render () {
     const {
       settings,
@@ -54,9 +79,9 @@ class Settings extends React.Component {
                           </p>
                         </div>
 
-                        <div className="field">
-                          <label className="label">Cards</label>
+                        <label className="label">Cards</label>
 
+                        <div className="field">
                           <p className="control">
                             <span className="select is-medium">
                               <select
@@ -70,9 +95,9 @@ class Settings extends React.Component {
                           </p>
                         </div>
 
-                        <div className="field">
-                          <label className="label">Table</label>
+                        <label className="label">Table</label>
 
+                        <div className="field">
                           <p className="control">
                             <span className="select is-medium">
                               <select
@@ -94,14 +119,16 @@ class Settings extends React.Component {
                             <label className="checkbox">
                               <input
                                 type="checkbox"
-                                checked={settings.timer}
+                                checked={settings.timer.isSet}
                                 onChange={() => toggleTimer()}
                               />
 
-                              Timer {settings.timer ? 'on' : 'off'}
+                              Timer {settings.timer.isSet ? 'on' : 'off'}
                             </label>
                           </p>
                         </div>
+
+                        {this.renderDurationField()}
 
                         <div className="field">
                           <p className="control">
@@ -140,6 +167,7 @@ Settings.propTypes = {
   selectDeck: React.PropTypes.func.isRequired,
   selectTable: React.PropTypes.func.isRequired,
   toggleTimer: React.PropTypes.func.isRequired,
+  setTimerDuration: React.PropTypes.func.isRequired,
   toggleEndOnLastKing: React.PropTypes.func.isRequired
 }
 

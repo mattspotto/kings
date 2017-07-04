@@ -4,6 +4,7 @@ import {
   selectDeck,
   selectTable,
   toggleTimer,
+  setTimerDuration,
   toggleEndOnLastKing
 } from '../modules/settings'
 
@@ -23,6 +24,7 @@ const mapDispatchToProps = {
   selectDeck,
   selectTable,
   toggleTimer,
+  setTimerDuration,
   toggleEndOnLastKing
 }
 
