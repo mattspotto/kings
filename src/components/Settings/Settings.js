@@ -45,7 +45,7 @@ class Settings extends React.Component {
     } = this.props;
 
     return (
-      <section className="hero is-primary is-fullheight">
+      <section className="hero is-dark is-fullheight">
         <Header />
 
         <div className={`${classes.base} ${settings.tableSelected.id}`}>

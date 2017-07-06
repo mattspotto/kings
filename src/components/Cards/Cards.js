@@ -57,7 +57,7 @@ class Cards extends Component {
     }
 
     return (
-      <section className="hero is-primary is-fullheight">
+      <section className="hero is-dark is-fullheight">
         <Header />
 
         <div className={`${classes.base} ${settings.tableSelected.id}`}>
@@ -111,7 +111,7 @@ class Cards extends Component {
 
                 <div className="level-right">
                   <p className="level-item">
-                    <a className="button is-primary" onClick={initCards}>New Game</a>
+                    <a className="button is-dark" onClick={initCards}>New Game</a>
                   </p>
                 </div>
               </nav>
