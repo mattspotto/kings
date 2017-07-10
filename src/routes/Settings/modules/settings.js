@@ -7,6 +7,7 @@ import {
 // ------------------------------------
 // Constants
 // ------------------------------------
+export const RESET_SETTINGS = 'RESET_SETTINGS';
 export const SELECT_CARDS = 'SELECT_CARDS';
 export const SELECT_DECK = 'SELECT_DECK';
 export const SELECT_TABLE = 'SELECT_TABLE';
@@ -17,6 +18,10 @@ export const TOGGLE_END_ON_LAST_KING = 'TOGGLE_END_ON_LAST_KING';
 // ------------------------------------
 // Actions
 // ------------------------------------
+export function resetSettings () {
+  return { type: RESET_SETTINGS };
+}
+
 export function selectCards (value) {
   return {
     type: SELECT_CARDS,
@@ -39,9 +44,7 @@ export function selectTable (value) {
 }
 
 export function toggleTimer () {
-  return {
-    type: TOGGLE_TIMER
-  }
+  return { type: TOGGLE_TIMER };
 }
 
 export function setTimerDuration (duration) {
@@ -52,23 +55,38 @@ export function setTimerDuration (duration) {
 }
 
 export function toggleEndOnLastKing () {
-  return {
-    type: TOGGLE_END_ON_LAST_KING
-  }
+  return { type: TOGGLE_END_ON_LAST_KING };
 }
 
 export const actions = {
+  resetSettings,
   selectCards,
   selectDeck,
   selectTable,
   toggleTimer,
-  toggleEndOnLastKing
+  toggleEndOnLastKing,
+  setTimerDuration
 }
+
+const initialState = {
+  cards: cards,
+  cardsSelected: cards[0],
+  decks: decks,
+  deckSelected: decks[Object.keys(decks)[0]],
+  table: table,
+  tableSelected: table[0],
+  timer: {
+    isSet: false,
+    duration: 20
+  },
+  endOnLast: false
+};
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
+  [RESET_SETTINGS]: () => initialState,
   [SELECT_CARDS]: (state, action) => {
     return {
       ...state,
@@ -113,21 +131,8 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {
-  cards: cards,
-  cardsSelected: cards[0],
-  decks: decks,
-  deckSelected: decks[Object.keys(decks)[0]],
-  table: table,
-  tableSelected: table[0],
-  timer: {
-    isSet: false,
-    duration: 20
-  },
-  endOnLast: false
-};
-
 export default function settingsReducer (state = initialState, action) {
+  console.log('settingsReducer', action);
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

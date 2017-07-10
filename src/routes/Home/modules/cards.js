@@ -10,6 +10,7 @@ import { start } from './timer';
 // Constants
 // ------------------------------------
 export const INIT_CARDS = 'INIT_CARDS';
+export const RESET_GAME = 'RESET_GAME';
 export const SHUFFLE_CARDS = 'SHUFFLE_CARDS';
 export const FLIP_CARD = 'FLIP_CARD';
 export const HIDE_LAST_FLIPPED = 'HIDE_LAST_FLIPPED';
@@ -28,13 +29,19 @@ function initCardsWithDeck(rules) {
   }
 }
 
+function resetGame(rules) {
+  return {
+    type: RESET_GAME
+  }
+}
+
 export function initCards() {
   return (dispatch, getState) => {
     const { settings } = getState();
-    console.log('initCards', settings);
     const rules = settings.deckSelected.rules;
     const { duration, isSet } = settings.timer;
 
+    dispatch(resetGame());
     dispatch(initCardsWithDeck(rules));
 
     if (isSet) dispatch(start(duration));
@@ -116,6 +123,22 @@ export const cardsActions = {
   hideGameOver
 }
 
+const initialState = {
+  cards: [],
+  kingsFlipped: 0,
+  cardsFlipped: 0,
+  isGameOver: false,
+  lastFlipped: {
+    rank: {},
+    rule: {},
+    suit: {},
+    tips: [],
+    tipShown: '',
+    isVisible: false,
+    flipped: false
+  }
+};
+
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
@@ -123,8 +146,6 @@ const ACTION_HANDLERS = {
   [INIT_CARDS]: (state, action) => {
     const gameRules = action.payload;
     let cards = [];
-
-    console.log(gameRules);
 
     for (var i = 0; i < ranks.length; i++) {
       for (var j = 0; j < suits.length; j++) {
@@ -157,18 +178,13 @@ const ACTION_HANDLERS = {
       cards[randomIndex] = tempValue;
     }
 
-    return {
-      ...state,
-      cards,
-      kingsFlipped: 0
-    };
+    return { ...state, cards, kingsFlipped: 0 };
   },
+  [RESET_GAME]: () => initialState,
   [FLIP_CARD]: (state, action) => {
     let kingsFlipped = state.kingsFlipped;
     let cardsFlipped = state.cardsFlipped + 1;
     let card = action.payload;
-
-    console.log('FLIP_CARD card', card);
 
     card.flipped = true;
 
@@ -207,21 +223,6 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {
-  cards: [],
-  kingsFlipped: 0,
-  cardsFlipped: 0,
-  isGameOver: false,
-  lastFlipped: {
-    rank: {},
-    rule: {},
-    suit: {},
-    tips: [],
-    tipShown: '',
-    isVisible: false,
-    flipped: false
-  }
-};
 export default function cardsReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

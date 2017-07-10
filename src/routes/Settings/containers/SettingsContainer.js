@@ -1,12 +1,5 @@
-import { connect } from 'react-redux'
-import {
-  selectCards,
-  selectDeck,
-  selectTable,
-  toggleTimer,
-  setTimerDuration,
-  toggleEndOnLastKing
-} from '../modules/settings'
+import { connect } from 'react-redux';
+import { actions } from '../modules/settings';
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -20,12 +13,7 @@ import Settings from 'components/Settings'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-  selectCards,
-  selectDeck,
-  selectTable,
-  toggleTimer,
-  setTimerDuration,
-  toggleEndOnLastKing
+  ...actions
 }
 
 // const mapStateToProps = (state) => ({

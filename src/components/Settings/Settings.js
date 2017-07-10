@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
+import { IndexLink } from 'react-router';
 import FaCog from 'react-icons/lib/fa/cog';
 import Header from '../Header';
 import classes from './Settings.scss';
 
-class Settings extends React.Component {
+export default class Settings extends Component {
   constructor(props) {
     super(props);
     // this.state = {};
@@ -41,7 +42,8 @@ class Settings extends React.Component {
       selectDeck,
       selectTable,
       toggleTimer,
-      toggleEndOnLastKing
+      toggleEndOnLastKing,
+      resetSettings
     } = this.props;
 
     return (
@@ -146,9 +148,15 @@ class Settings extends React.Component {
                     </div>
 
                     <footer className="card-footer">
-                      <a className="card-footer-item">Save</a>
+                      <IndexLink to='/'
+                        className="card-footer-item">
+                        Back
+                      </IndexLink>
 
-                      <a className="card-footer-item">Reset</a>
+                      <a className="card-footer-item"
+                        onClick={() => resetSettings()}>
+                        Reset
+                      </a>
                     </footer>
                   </div>
                 </div>
@@ -162,13 +170,12 @@ class Settings extends React.Component {
 }
 
 Settings.propTypes = {
-  settings: React.PropTypes.object.isRequired,
-  selectCards: React.PropTypes.func.isRequired,
-  selectDeck: React.PropTypes.func.isRequired,
-  selectTable: React.PropTypes.func.isRequired,
-  toggleTimer: React.PropTypes.func.isRequired,
-  setTimerDuration: React.PropTypes.func.isRequired,
-  toggleEndOnLastKing: React.PropTypes.func.isRequired
+  settings: PropTypes.object.isRequired,
+  selectCards: PropTypes.func.isRequired,
+  selectDeck: PropTypes.func.isRequired,
+  selectTable: PropTypes.func.isRequired,
+  toggleTimer: PropTypes.func.isRequired,
+  setTimerDuration: PropTypes.func.isRequired,
+  toggleEndOnLastKing: PropTypes.func.isRequired,
+  resetSettings: PropTypes.func.isRequired
 }
-
-export default Settings;
